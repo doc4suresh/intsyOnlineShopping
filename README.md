@@ -1,6 +1,6 @@
 ## Intsy Online Shopping
 
-A CCTV and security system retailer, Intsy offers both retail and wholesale services. Users can manage sales, purchases, invoicing, and online payments using this interface for the Intsy online shopping system.
+Intsy is a wholesale distributor and integrator of security electronic equipment. The company is importing, assembling and distributing security products. Managed purchase item online and payment handling, order creation, and shipping handling, pricing, and billing handle differently for retail customers and distributors, email promotions for special items vary kind of report generation with admin panel in this system. Spring security used for user authentication and role-based access control.
 
 Intsy Online Shopping system includes a number of extensions in addition to the basic system that customers can use to add the functionality their businesses require, including bulk processing capabilities, after-sales product tracking, recurring invoicing, multi-location inventory, special discount for wholesale custommers and more.
 
@@ -12,3 +12,5 @@ Intsy Online Shopping system includes a number of extensions in addition to the 
 - Bootstrap 4
 - Thymeleaf
 - My SQL DB
+- Hibernate
+- Maven
