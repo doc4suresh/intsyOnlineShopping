@@ -1,0 +1,124 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+
+	<div th:if="${notEnoughStock}"
+		class="alert alert-warning alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Warning!</strong> Not enough stock for update, please try updating lower quantity
+	</div>
+	<div th:if="${emptyCart}" class="alert alert-warning">Oops, your
+		cart is empty. See if you can find what you like in our product list
+		and add them to cart.</div>
+
+
+	<div class="container">
+
+		<div th:if="${nothingAdded}" class="h2 text-center">Nothing
+			Added to Shopping Cart. Please Add Item to Shopping Cart</div>
+		<div th:unless="${nothingAdded}">
+
+
+		
+
+			<div class="row">
+				<div class="col-6 text-left">
+					<a class="btn btn-success" th:href="@{/items}"> Continue
+						Shopping</a>
+				</div>
+				<div class="col-6 text-right">
+					<a class="btn btn-warning"
+						th:href="@{/checkout(id=${shoppingCart.id})}"> Checkout </a>
+				</div>
+			</div>
+
+			<br>
+			<div class="row border">
+				<div class="col-8 h4">Products</div>
+				<div class="col-2 h4">Price</div>
+				<div class="col-2 h4">Qty</div>
+			</div>
+
+
+			<!-- 				**************** display products in cart **************** -->
+			<div class="row border" th:each="cartItem : ${cartItemList}">
+				<form th:action="@{/shoppingCart/updateCartItem}" method="post"
+					class="col-12">
+					<br>
+					<div class="row">
+						<div class="col-2">
+							<a th:href="@{/itemInfo?id=}+${cartItem.item.itemId}"> <img
+								style="width: 70px;" class="img-responsive center-block"
+								th:src="#{adminportal}+@{img/itemimages/}+${cartItem.item.itemId}+'.png'" />
+							</a>
+						</div>
+						<div class="col-6">
+							<a th:href="@{/itemInfo?id=}+${cartItem.item.itemId}"
+								th:text="${cartItem.item.itemName}"></a>
+							<p th:if="${cartItem.item.qty&gt;10}" style="color: green;">In
+								Stock</p>
+							<p th:if="${cartItem.item.qty&lt;10 and cartItem.item.qty&gt;0}"
+								style="color: green;">
+								Only <span th:text="${cartItem.item.qty}"></span> In Stock
+							</p>
+							<p th:if="${cartItem.item.qty==0}" style="color: darkred;">Product
+								Unavailable</p>
+							<a
+								th:href="@{/shoppingCart/removeItemFromCart?id=}+${cartItem.id}"
+								class="text-warning">Remove Item From Cart</a>
+						</div>
+
+						<div class="col-2">
+							<h5 style="color: #db3208; font-size: large;">
+								Rs.<span  th:text="${item.getDiscountedPrice()}"
+									th:style="${cartItem.item.qty}==0? 'text-decoration: line-through' : '' "></span>
+							</h5>
+						</div>
+
+						<div class="col-2">
+							<input hidden="hidden" name="id" th:value="${cartItem.id}" /> <input
+								type="number" min="0" pattern="[0-9]+"
+								title="Error: Please enter positive number."
+								th:id="${cartItem.id}" th:name="qty"
+								th:disabled="${cartItem.item.qty==0}"
+								class="form-control cartItemQty" th:value="${cartItem.qty}" />
+								<div style="padding:5px;">
+							<button style="display: none;"
+								th:id="'update-item-'+${cartItem.id}" type="submit"
+								class="btn btn-warning btn-sm">Update</button></div>
+						</div>
+
+
+					</div>
+				</form>
+
+			</div>
+
+			<div class="row border justify-content-end">
+				<div class="col-4 text-right">
+					<strong style="font-size: large;">Total Price (<span
+						th:text="${#lists.size(cartItemList)}"></span> items):
+
+					</strong>
+				</div>
+				<div class="col-3 text-right">
+					<span style="color: #db3208;" class="h4">$<span
+						th:text="${shoppingCart.grandTotal}"></span></span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+	<div th:replace="common :: common-scripts" />
+</body>
+</html>

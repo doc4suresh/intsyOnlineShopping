@@ -1,0 +1,114 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+	<div class="container-fluid">
+
+		<div class="row" style="margin: 60px">
+<!-- 			<div class="col-3">
+				<h3>
+					<label for="category">Category</label>
+				</h3>
+
+				<div class="list-group" id="category">
+
+					<div class="accordion" id="accordionItemList">
+						<div class="card-header mb-0">
+							<h5 class="mb-0">
+								<button class="btn" type="button">
+									<a class="font-weight-bold" th:href="@{/items(category='all')}">All
+										Items</a>
+								</button>
+							</h5>
+						</div>
+						<div class="card" th:each="cat : ${catList}">
+							<div class="card-header" id="headingOne">
+								<h5 class="mb-0">
+									<button class="btn font-weight-bold" type="button"
+										data-toggle="collapse" th:href="'#collapse' + ${cat.getId()}"
+										aria-expanded="true"
+										th:attr="aria-controls='collapse' + ${cat.getId()}">
+										<a th:href="@{/searchByCategory(category=${cat.id})}"
+											th:text="${cat.catName}"></a>
+									</button>
+								</h5>
+							</div>
+
+							<div th:id="'collapse' + ${cat.getId()}" class="collapse show"
+								aria-labelledby="headingOne" data-parent="#accordionItemList">
+								<div class="card-body text-xl-center font-weight-bold"
+									data-th-each="subcatEach: ${cat.getSubcategotyList()}">
+									<h6 class="mb-0">
+										<a
+											th:href="@{/searchBySubcategory(subcategory=${subcatEach.id})}"
+											th:text="${subcatEach.subcatName}"></a>
+									</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+
+			<div class="col-12">
+				<div th:if="${emptyList}">
+					<h5 style="font-style: italic;">No Results Found, Try again
+						later</h5>
+
+				</div>
+
+					<table id="itemListTable" border="0">
+						<thead>
+							<tr>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="item" data-th-each="item:${itemList}">
+								<td><div th:if="item!=null">
+										<div class="row border-bottom" style="margin-bottom: 50px;">
+											<div class="col-3">
+												<a th:href="@{/itemInfo?id=}+${item.itemId}"><img
+													class="img-fluid"
+													th:src="#{adminportal}+@{img/itemimages/}+${item.itemId}+'.png'" /></a>
+											</div>
+											<div class="col-9">
+												<a th:href="@{/itemInfo?id=}+${item.itemId}"><h4
+														th:text=${item.itemCode}></h4></a> <span
+													th:text=${item.itemName}></span> <br /> <span
+													style="font-size: x-large; color: #db3208;">Rs.<span
+													th:text="${#numbers.formatDecimal(item.sellPrice, 0,'COMMA',2,'POINT')}"></span></span>
+												<p></p>
+												<p
+													th:utext="${#strings.abbreviate(item.itemDescription, 1000)}"></p>
+
+											</div>
+
+
+										</div>
+									</div></td>
+							</tr>
+						</tbody>
+
+
+
+					</table>
+			</div>
+
+		</div>
+
+
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+	<script type="text/javascript">$("#itemListTable").dataTable();</script>
+	
+</body>
+</html>

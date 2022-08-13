@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+	<div class="container">
+
+
+		<div th:if="${addItemSuccess}"
+			class="alert alert-success alert-dismissible">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Success!</strong><i class="fa fa-check" area-hidden="true"
+				style="color: forestgreen"></i>
+			<div
+				th:text=" ${qty} + ' of ' + ${item.itemName} + ' Added to Cart' "></div>
+		</div>
+
+		<div th:if="${notEnoughStock}"
+			class="alert alert-warning alert-dismissible">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Not Enough Stock!</strong> <span
+				th:text="'Only ' + ${item.qty}+ ' of ' + ${item.itemName} + ' In Stock' "></span>
+
+		</div>
+
+		<form th:action="@{/shoppingCart/addItemToCart}" method="post">
+			<input hidden="hidden" th:field="*{item.itemId}"></input>
+
+			<div class="row" style="margin-top: 120px;">
+				<div class="col-3">
+					<a th:href="@{items}">Back to Items</a> <img class="img-fluid"
+						th:src="#{adminportal}+@{img/itemimages/}+${item.itemId}+'.png'" />
+				</div>
+
+				<div class="col-9">
+
+					<div class="row">
+						<div class="col">
+							<h3>
+								<strong> <span th:text="${item.itemName}"> </span></strong>
+							</h3>
+
+							<h5>
+								<strong> Item Brand: </strong> <span
+									th:text="${item.brand.getBrandName()}"> </span>
+							</h5>
+							<h5>
+								<strong> Item Code: </strong> <span th:text="${item.itemCode}">
+								</span>
+							</h5>
+
+							<div class="card" style="border-width: 5px; margin-top: 20px;">
+
+								<div class="card-body">
+									<div class="row">
+										<div class="col-6">
+											<h4>
+												Item Price: <span
+													th:style="${showPrice? 'display:display': 'display:none'}"
+													class="text-danger">Rs.<span
+													th:with="itemPrice=${item.sellPrice -item.sellPrice * discount}"
+													th:text="${#numbers.formatDecimal(itemPrice, 0,'COMMA',2,'POINT')}"></span></span>
+											</h4>
+											<span class="text-danger"
+												th:style="${showPrice? 'display:none': 'display:block'}">Please
+												<a href="login">Sign in</a> to view the price
+											</span> <span th:style="${showPrice? 'display:display': 'display:none'}"> Quantity: <input type="text"
+												th:value="${qty}" name="qty"> </input></span> 
+
+
+										</div>
+										<div class="col-6">
+											<h4 th:if="*{item.qty==0}" style="color: darkred;">Out
+												of Stock</h4>
+											<button type="submit"  th:class="${showPrice? 'd-block btn btn-success':'d-none'}"
+												style="color: white; border: 1px solid white; padding: 10px 40px 10px 40px; position: absolute; right: 30px; bottom: 0;">
+												Add to Cart</button>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					<hr />
+					<p th:utext="${item.itemDescription}"></p>
+				</div>
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+		</form>
+
+
+
+
+
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+
+
+</body>
+</html>

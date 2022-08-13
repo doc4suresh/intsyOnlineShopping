@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+.card-body{
+	
+	
+	background-color: rgba(121, 234, 28, 0.1);   
+	padding: 20px;"
+}
+
+.card-header{
+	background-color: rgba(121, 234, 28, 0.3);
+	
+}
+
+thead{
+	background-color: rgba(121, 234, 28, 0.1); 
+	
+}

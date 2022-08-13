@@ -1,0 +1,64 @@
+
+<!doctype html>
+<html lang="en">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+
+	<div th:if="${param.error != null}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Error!</strong> Incorrect username or password.
+	</div>
+
+	<div class="wrapper">
+
+		<form th:action="@{/login}" method="post" class="form-signin">
+
+			<div class="container">
+				<div class="card card-default border-success col-4 mx-auto">
+					<br>
+					<h2 class="text-center">Please Sign In</h2>
+					<div class="card-body">
+						<div class="form-group">
+							<input required="required" type="text" class="form-control"
+								id="username" name="username" placeholder="Email Address" />
+						</div>
+
+						<div class="form-group">
+							<input required="required" type="password" class="form-control"
+								id="password" name="password" placeholder="Password" />
+						</div>
+
+						<div class="form-group">
+							<input type="checkbox" value="remember-me" id="rememberMe"
+								name="rememberMe"> Remember me </label>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-lg btn-success">Log
+								in</button>
+							<button type="reset" class="btn btn-lg btn-success">Cancel</button>
+						</div>
+
+
+						<div class="form-group">
+							<a th:href="@{/resetPassword}">Forgot your password?</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+
+	</div>
+
+	<div th:replace="common :: common-scripts" />
+
+
+
+</body>
+</html>

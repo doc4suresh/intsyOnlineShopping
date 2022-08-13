@@ -1,0 +1,155 @@
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+	<div th:if="${registrationSent}"
+		class="alert alert-success alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Success!</strong> Information submitted successfully you will
+		receive a confirmation email soon.
+	</div>
+
+	<div th:if="${emailExists}"
+		class="alert alert-danger alert-dismissible">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Failed!</strong> User already registered with this email.
+		Please try using different email address.
+	</div>
+
+	<div class="container">
+		<div class="card card-default">
+			<h2 class="text-center card-header">Customer Registration</h2>
+			<div class="card-body">
+				<form th:action="@{/customerReg}" method="POST">
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="regType">* Registration Type : </label> <select
+									required="required" class="form-control" id="regType"
+									name="regType">
+									<option value="retail">Retail</option>
+									<option value="distributor">Distributor</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="firstName">* First Name : </label> <input
+									type="text" required="required" placeholder="Enter First Name"
+									class="form-control" id="firstName" name="firstName" pattern="[a-zA-Z]+" title="Error: Please input letters only."/>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label for="lastName">Last Name : </label> <input type="text"
+									placeholder="Enter Last Name" class="form-control"
+									id="lastName" name="lastName" pattern="[a-zA-Z]+" title="Error: Please input letters only."/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="email">* Email : </label> <input type="email"
+									required="required" placeholder="Enter Email"
+									class="form-control" id="email" name="email" />
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label for="mobile">* Mobile : </label> <input type="text"
+									required="required" placeholder="Enter Mobile"
+									class="form-control" id="mobile" name="mobile" pattern="0\d{9}" title="Error: 10 digits required, Please enter valid phone number."/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="companyName">Company Name : </label> <input
+									type="text" placeholder="Enter Company Name"
+									class="form-control" id="companyName" name="companyName" />
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label for="compnayRegNo">Company Registration No : </label> <input
+									type="text" placeholder="Enter Company Reg No"
+									class="form-control" id="companyRegNo" name="companyRegNo" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="address1">* Address 1 : </label> <input type="text"
+									required="required" placeholder="Enter Address 1"
+									class="form-control" id="address1" name="address1" />
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label for="address2">Address 2 : </label> <input type="text"
+									placeholder="Enter Address 2" class="form-control"
+									id="address2" name="address2" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<label for="city">* City : </label> <input type="text"
+									required="required" placeholder="Enter City"
+									class="form-control" id="city" name="city" pattern="[a-zA-Z]+" title="Error: Please input letters only."/>
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<label for="district">* District : </label> <select
+									required="required" class="form-control" id="district"
+									name="district" placeholder="Enter District">
+									<option th:each="district:${districtList}"
+										th:value="${district}" th:selected="true"
+										th:text="${district}">
+								</select>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<label for="comment">Comment : </label>
+								<textarea placeholder="Enter Comment" class="form-control"
+									id="comment" name="comment"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button type="submit" class="btn btn-success">Submit</button>
+						<button type="reset" class="btn btn-success">Clear</button>
+						<button type="cancel" class="btn btn-success">Cancel</button>
+					</div>
+				</form>
+				<br>
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	<div th:replace="common :: common-scripts" />
+
+</body>
+</html>

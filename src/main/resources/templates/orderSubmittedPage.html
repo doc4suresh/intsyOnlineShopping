@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+
+	<div class="container">
+		<div class="row" style="margin-top: 10px;">
+			<div class="col-12">
+				<div class="alert alert-success">
+					<h3>
+						<i class="fa fa-check text-success" aria-hidden="true"
+					></i> Thank you, your order has been
+						placed.
+					</h3>
+					<h4>
+						You will receive a confirmation email soon. The estimated delivery date is <span
+							th:text="${estimatedDeliveryDate}"></span>
+					</h4>
+				</div>
+
+<!-- 				<h3>List of Items</h3>
+				<div class="row" th:each="cartItem : ${cartItemList}">
+					<hr />
+					<div class="col-2"></div>
+					<div class="col-2">
+
+						<a th:href="@{/itemDetail(id=${cartItem.item.itemId})}"> <img
+							class="img-responsive"
+							th:src="#{adminPath}+@{/img/itemimages/}+${cartItem.item.itemId}+'.png'"
+							style="width: 70px;" />
+						</a>
+					</div>
+					<div class="col-6">
+						<div style="margin-left: 50px;">
+							<a th:href="@{/itemDetail?id=}+${cartItem.item.itemId}"><h4
+									th:text="${cartItem.item.itemCode}"></h4></a>
+						</div>
+					</div>
+
+					<div class="col-2">
+						<h5 style="color: #db3208; font-size: large;">
+							$<span th:text="${cartItem.item.sellPrice}"
+								th:style="${cartItem.item.qty}==0? 'text-decoration: line-through' : ''"></span>
+						</h5>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<!-- end of container -->
+<div th:replace="common :: common-scripts" />
+</body>
+</html>

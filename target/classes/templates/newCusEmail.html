@@ -1,0 +1,113 @@
+
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="common :: common-header" />
+
+<body>
+	<div th:replace="common :: common-navbar" />
+	<br>
+
+	<div class="alert success" th:if="${userUpdated}">
+		<span class="closebtn">&times;</span><strong>Success!</strong> <br>
+		User Information Updated
+	</div>
+
+	<!-- container -->
+	<div class="container">
+
+		<div class="card card-default">
+			<h2 class="card-header text-center">Customer Registration
+				Confirmation</h2>
+			<div class="card-body">
+				<div th:classappend="${classActiveEdit}? 'in active'">
+					<form th:action="@{/newCusEmail}" method="POST">
+
+
+						<div class="row">
+							<div class="form-group col-12">
+								<label for="regType">* Registration Type : </label> <input
+									type="text" class="form-control" id="regType" name="regType"
+									th:value="${user.regType}" readonly="readonly" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-6">
+								<label for="firstName">* First Name : </label> <input
+									type="text" class="form-control" id="firstName"
+									name="firstName" th:value="${user.firstName}" readonly="readonly" />
+							</div>
+
+							<div class="form-group col-6">
+								<label for="lastName">Last Name : </label> <input type="text"
+									class="form-control" id="lastName" name="lastName"
+									th:value="${user.lastName}" readonly="readonly" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-6">
+								<label for="companyName">Company Name : </label> <input
+									type="text" class="form-control" id="companyName"
+									name="companyName" th:value="${user.companyName}" readonly="readonly" />
+							</div>
+
+							<div class="form-group col-6">
+								<label for="compnayRegNo">Company Registration No : </label> <input
+									type="text" class="form-control" id="companyRegNo"
+									name="companyRegNo" th:value="${user.companyRegNo}" readonly="readonly" />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="email">* Email : </label> <input type="email"
+								class="form-control" id="email" name="email"
+								th:value="${user.username}" />
+						</div>
+
+						<div class="form-group">
+							<label for="token"> * Enter token : </label> <input type="text"
+								placeholder="Enter Token" required="required"
+								class="form-control" id="token" name="token"
+								th:value="${pRToken.token}" />
+						</div>
+
+
+						<div class="form-group">
+							<label for="newPassword"> * Enter New Password : </label> <input
+								placeholder="Enter New Password here" type="password"
+								required="required" class="form-control" id="newPassword"
+								name="newPassword" />
+						</div>
+
+
+
+						<div class="form-group">
+							<label for="confirmPassword"> * Confirm Password : </label> <input
+								placeholder="Confirm Password here" type="password"
+								required="required" class="form-control" id="confirmPassword"
+								name="confirmPassword" />
+						</div>
+
+						<div class="text-center">
+							<button type="submit" class="btn btn-success">Submit</button>
+							<button type="reset" class="btn btn-success">Clear</button>
+							<button type="cancel" class="btn btn-success">Cancel</button>
+
+							<input type="hidden" name="id" th:value="${user.id}" />
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /container -->
+
+	<div th:replace="common :: common-scripts" />
+
+</body>
+</html>
